@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Chat</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Welcome to Secure Chat</h2>
+        <div class="message-box">
+            {% for message in messages %}
+                <div class="message">
+                    <p><strong>{{ message.sender }}:</strong> 
+                        <span class="encrypted-text" data-encrypted-message="{{ message.encrypted_message }}">
+                            Encrypted Message
+                        </span>
+                        <button class="decrypt-btn">Decrypt</button>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+        <form action="/chat" method="POST">
+            <input type="text" name="message" placeholder="Type your message" required>
+            <input type="text" name="receiver" placeholder="Receiver's Username" required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script src="static/decryption.js"></script>
+</body>
+</html>
